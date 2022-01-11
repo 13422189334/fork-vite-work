@@ -65,7 +65,6 @@
 			<template #dropdown>
 				<el-dropdown-menu>
 					<el-dropdown-item command="/home">{{ $t('message.user.dropdown1') }}</el-dropdown-item>
-					<el-dropdown-item command="wareHouse">{{ $t('message.user.dropdown6') }}</el-dropdown-item>
 					<el-dropdown-item command="/personal">{{ $t('message.user.dropdown2') }}</el-dropdown-item>
 					<el-dropdown-item command="/404">{{ $t('message.user.dropdown3') }}</el-dropdown-item>
 					<el-dropdown-item command="/401">{{ $t('message.user.dropdown4') }}</el-dropdown-item>
@@ -136,7 +135,10 @@ export default {
 		const onLayoutSetingClick = () => {
 			proxy.mittBus.emit('openSetingsDrawer');
 		};
-		// 下拉菜单点击时
+
+		/**
+		 * 下拉菜单点击时
+		 * */
 		const onHandleCommandClick = (path: string) => {
 			if (path === 'logOut') {
 				ElMessageBox({
@@ -171,8 +173,6 @@ export default {
 						}, 300);
 					})
 					.catch(() => {});
-			} else if (path === 'wareHouse') {
-				window.open('https://gitee.com/lyt-top/vue-next-admin');
 			} else {
 				router.push(path);
 			}

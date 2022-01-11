@@ -10,8 +10,9 @@ const pathResolve = (dir: string): any => {
 const { VITE_PORT, VITE_OPEN, VITE_PUBLIC_PATH } = loadEnv();
 
 const alias: Record<string, string> = {
-	'/@': pathResolve('./src/'),
+	'@': pathResolve('./src/'),
 	'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
+	'/@': pathResolve('./src/'),
 };
 
 const viteConfig: UserConfig = {
@@ -33,6 +34,12 @@ const viteConfig: UserConfig = {
 				changeOrigin: true,
 				rewrite: (path) => path.replace(/^\/gitee/, ''),
 			},
+			'/cstmr-manager': {
+				target: 'https://development.mhealth100.com/cstmr-manager',
+				ws: true,
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/cstmr-manager/, ''),
+			}
 		},
 	},
 	build: {

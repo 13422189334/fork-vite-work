@@ -9,8 +9,8 @@ export default {
 		two4: 'Links',
 	},
 	copyright: {
-		one5: 'Copyright: Shenzhen XXX Software Technology Co., Ltd',
-		two6: 'Copyright: Shenzhen XXX software technology Guangdong ICP preparation no.05010000',
+		one5: 'Copyright: JSH XXX Software Technology Co., Ltd',
+		two6: 'Copyright: JSH XXX software technology Guangdong ICP preparation no.05010000',
 	},
 	account: {
 		accountPlaceholder1: 'The user name admin or not is test',

@@ -45,7 +45,8 @@
 				</el-col>
 				<el-col :span="8">
 					<div class="login-content-code">
-						<span class="login-content-code-img">1234</span>
+						<!--						<span class="login-content-code-img">1234</span>-->
+						<el-image class="login-content-code-img" :src="captcha" @click="() => changeCaptcha()"></el-image>
 					</div>
 				</el-col>
 			</el-row>
@@ -63,15 +64,16 @@
 </template>
 
 <script lang="ts">
-import { toRefs, reactive, defineComponent, computed, getCurrentInstance } from 'vue';
+	import { toRefs, reactive, defineComponent, computed, getCurrentInstance, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
-import { initFrontEndControlRoutes } from '/@/router/frontEnd';
-import { initBackEndControlRoutes } from '/@/router/backEnd';
-import { useStore } from '/@/store/index';
-import { Session } from '/@/utils/storage';
-import { formatAxis } from '/@/utils/formatTime';
+import { initFrontEndControlRoutes } from '@/router/frontEnd';
+import { initBackEndControlRoutes } from '@/router/backEnd';
+import { useStore } from '@/store/index';
+import { Session } from '@/utils/storage';
+import { formatAxis } from '@/utils/formatTime';
+import { adminRoles, adminAuthBtnList, adminPhoto, testRoles, testAuthBtnList, testPhoto } from '../mock/role'
 export default defineComponent({
 	name: 'loginAccount',
 	setup() {
@@ -83,14 +85,24 @@ export default defineComponent({
 		const state = reactive({
 			isShowPassword: false,
 			ruleForm: {
-				userName: 'admin',
-				password: '123456',
-				code: '1234',
+				userName: '',
+				password: '',
+				code: '',
 			},
 			loading: {
 				signIn: false,
 			},
+			captcha: ''
 		});
+
+		onMounted(() => {
+			changeCaptcha()
+		});
+
+		// 验证码获取
+		const changeCaptcha = () => {
+			state.captcha = `/cstmr-manager/captcha/kaptcha.jpg?${Date.now()}`
+		};
 		// 时间获取
 		const currentTime = computed(() => {
 			return formatAxis(new Date());
@@ -101,36 +113,27 @@ export default defineComponent({
 			state.loading.signIn = true;
 			let defaultRoles: Array<string> = [];
 			let defaultAuthBtnList: Array<string> = [];
-			// admin 页面权限标识，对应路由 meta.roles，用于控制路由的显示/隐藏
-			let adminRoles: Array<string> = ['admin'];
-			// admin 按钮权限标识
-			let adminAuthBtnList: Array<string> = ['btn.add', 'btn.del', 'btn.edit', 'btn.link'];
-			// test 页面权限标识，对应路由 meta.roles，用于控制路由的显示/隐藏
-			let testRoles: Array<string> = ['common'];
-			// test 按钮权限标识
-			let testAuthBtnList: Array<string> = ['btn.add', 'btn.link'];
+			let defaultPhoto: string = '';
 			// 不同用户模拟不同的用户权限
 			if (state.ruleForm.userName === 'admin') {
 				defaultRoles = adminRoles;
 				defaultAuthBtnList = adminAuthBtnList;
+				defaultPhoto = adminPhoto;
 			} else {
 				defaultRoles = testRoles;
 				defaultAuthBtnList = testAuthBtnList;
+				defaultPhoto = testPhoto;
 			}
 			// 用户信息模拟数据
 			const userInfos = {
 				userName: state.ruleForm.userName,
-				photo:
-					state.ruleForm.userName === 'admin'
-						? 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1813762643,1914315241&fm=26&gp=0.jpg'
-						: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=317673774,2961727727&fm=26&gp=0.jpg',
+				photo: defaultPhoto,
 				time: new Date().getTime(),
 				roles: defaultRoles,
 				authBtnList: defaultAuthBtnList,
 			};
-			// 存储 token 到浏览器缓存
+			// 存储 token、用户信息 到浏览器缓存
 			Session.set('token', Math.random().toString(36).substr(0));
-			// 存储用户信息到浏览器缓存
 			Session.set('userInfo', userInfos);
 			// 1、请注意执行顺序(存储用户信息到vuex)
 			store.dispatch('userInfos/setUserInfos', userInfos);
@@ -139,10 +142,8 @@ export default defineComponent({
 				await initFrontEndControlRoutes();
 				signInSuccess();
 			} else {
-				// 模拟后端控制路由，isRequestRoutes 为 true，则开启后端控制路由
-				// 添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
+				// 模拟后端控制路由，添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
 				await initBackEndControlRoutes();
-				// 执行完 initBackEndControlRoutes，再执行 signInSuccess
 				signInSuccess();
 			}
 		};
@@ -173,6 +174,7 @@ export default defineComponent({
 		};
 		return {
 			currentTime,
+			changeCaptcha,
 			onSignIn,
 			...toRefs(state),
 		};
@@ -231,7 +233,7 @@ export default defineComponent({
 			font-size: 16px;
 			font-weight: 700;
 			letter-spacing: 5px;
-			text-indent: 5px;
+			/*text-indent: 5px;*/
 			text-align: center;
 			cursor: pointer;
 			transition: all ease 0.2s;
