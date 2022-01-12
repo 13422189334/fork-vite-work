@@ -61,8 +61,8 @@
 <script lang="ts">
 import { toRefs, reactive, onMounted, ref } from 'vue';
 import { ElMessageBox, ElMessage } from 'element-plus';
-import AddUer from '/@/views/system/user/component/addUser.vue';
-import EditUser from '/@/views/system/user/component/editUser.vue';
+import AddUer from '@/views/system/user/component/addUser.vue';
+import EditUser from '@/views/system/user/component/editUser.vue';
 export default {
 	name: 'systemUser',
 	components: { AddUer, EditUser },

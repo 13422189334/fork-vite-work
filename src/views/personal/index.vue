@@ -185,7 +185,7 @@
 
 <script lang="ts">
 import { toRefs, reactive, computed } from 'vue';
-import { formatAxis } from '/@/utils/formatTime';
+import { formatAxis } from '@/utils/formatTime';
 import { newsInfoList, recommendList } from './mock';
 export default {
 	name: 'personal',

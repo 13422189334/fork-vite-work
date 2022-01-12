@@ -4,8 +4,8 @@
 
 <script lang="ts">
 import { computed } from 'vue';
-import { useStore } from '/@/store/index';
-import { judementSameArr } from '/@/utils/arrayOperation';
+import { useStore } from '@/store/index';
+import { judementSameArr } from '@/utils/arrayOperation';
 export default {
 	name: 'authAll',
 	props: {

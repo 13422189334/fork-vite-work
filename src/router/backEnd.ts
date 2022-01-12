@@ -1,9 +1,9 @@
-import { store } from '/@/store/index.ts';
-import { Session } from '/@/utils/storage';
-import { NextLoading } from '/@/utils/loading';
-import { setAddRoute, setFilterMenuAndCacheTagsViewRoutes } from '/@/router/index';
-import { dynamicRoutes } from '/@/router/route';
-import { getMenuAdmin, getMenuTest } from '/@/api/menu/index';
+import { store } from '@/store/index.ts';
+import { Session } from '@/utils/storage';
+import { NextLoading } from '@/utils/loading';
+import { setAddRoute, setFilterMenuAndCacheTagsViewRoutes } from '@/router/index';
+import { dynamicRoutes } from '@/router/route';
+import { getMenuAdmin, getMenuTest } from '@/api/menu/index';
 
 const layouModules: any = import.meta.glob('../layout/routerView/*.{vue,tsx}');
 const viewsModules: any = import.meta.glob('../views/**/*.{vue,tsx}');
@@ -33,7 +33,7 @@ export async function initBackEndControlRoutes() {
 	const res = await getBackEndControlRoutes();
 	// 存储接口原始路由（未处理component），根据需求选择使用
 	store.dispatch('requestOldRoutes/setBackEndControlRoutes', JSON.parse(JSON.stringify(res.data)));
-	// 处理路由（component），替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
+	// 处理路由（component），替换 dynamicRoutes（@/router/route）第一个顶级 children 的路由
 	dynamicRoutes[0].children = await backEndComponent(res.data);
 	// 添加动态路由
 	await setAddRoute();

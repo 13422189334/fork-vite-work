@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import { store } from '/@/store/index.ts';
-import { Session } from '/@/utils/storage';
-import { NextLoading } from '/@/utils/loading';
-import { staticRoutes, dynamicRoutes } from '/@/router/route';
-import { initFrontEndControlRoutes } from '/@/router/frontEnd';
-import { initBackEndControlRoutes } from '/@/router/backEnd';
+import { store } from '@/store/index.ts';
+import { Session } from '@/utils/storage';
+import { NextLoading } from '@/utils/loading';
+import { staticRoutes, dynamicRoutes } from '@/router/route';
+import { initFrontEndControlRoutes } from '@/router/frontEnd';
+import { initBackEndControlRoutes } from '@/router/backEnd';
 
 /**
  * 创建一个可以被 Vue 应用程序使用的路由实例
@@ -65,7 +65,7 @@ export function formatTwoStageRoutes(arr: any) {
 			}
 			newArr[0].children.push({ ...v });
 			// 存 name 值，keep-alive 中 include 使用，实现路由的缓存
-			// 路径：/@/layout/routerView/parent.vue
+			// 路径：@/layout/routerView/parent.vue
 			if (newArr[0].meta.isKeepAlive && v.meta.isKeepAlive) {
 				cacheList.push(v.name);
 				store.dispatch('keepAliveNames/setCacheKeepAlive', cacheList);
@@ -129,7 +129,7 @@ export function setFilterMenuAndCacheTagsViewRoutes() {
  * 获取当前用户权限标识去比对路由表（未处理成多级嵌套路由）
  * @description 这里主要用于动态路由的添加，router.addRoute
  * @link 参考：https://next.router.vuejs.org/zh/api/#addroute
- * @param chil dynamicRoutes（/@/router/route）第一个顶级 children 的下路由集合
+ * @param chil dynamicRoutes（@/router/route）第一个顶级 children 的下路由集合
  * @returns 返回有当前用户权限标识的路由数组
  */
 export function setFilterRoute(chil: any) {
@@ -148,7 +148,7 @@ export function setFilterRoute(chil: any) {
 
 /**
  * 获取有当前用户权限标识的路由数组，进行对原路由的替换
- * @description 替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
+ * @description 替换 dynamicRoutes（@/router/route）第一个顶级 children 的路由
  * @returns 返回替换后的路由数组
  */
 export function setFilterRouteEnd() {
@@ -160,7 +160,7 @@ export function setFilterRouteEnd() {
 /**
  * 添加动态路由
  * @method router.addRoute
- * @description 此处循环为 dynamicRoutes（/@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
+ * @description 此处循环为 dynamicRoutes（@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
  * @link 参考：https://next.router.vuejs.org/zh/api/#addroute
  */
 export function setAddRoute() {
@@ -173,7 +173,7 @@ export function setAddRoute() {
 /**
  * 删除/重置路由
  * @method router.removeRoute
- * @description 此处循环为 dynamicRoutes（/@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
+ * @description 此处循环为 dynamicRoutes（@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
  * @link 参考：https://next.router.vuejs.org/zh/api/#push
  */
 export function resetRoute() {

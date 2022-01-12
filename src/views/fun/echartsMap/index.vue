@@ -10,7 +10,7 @@
 import { toRefs, reactive, computed, onMounted } from 'vue';
 import * as echarts from 'echarts';
 import 'echarts/extension/bmap/bmap';
-import { useStore } from '/@/store/index';
+import { useStore } from '@/store/index';
 import { echartsMapList, echartsMapData } from './mock';
 export default {
 	name: 'funEchartsMap',

@@ -58,8 +58,8 @@
 <script lang="ts">
 import { toRefs, reactive, onMounted, ref } from 'vue';
 import { ElMessageBox, ElMessage } from 'element-plus';
-import AddRole from '/@/views/system/role/component/addRole.vue';
-import EditRole from '/@/views/system/role/component/editRole.vue';
+import AddRole from '@/views/system/role/component/addRole.vue';
+import EditRole from '@/views/system/role/component/editRole.vue';
 export default {
 	name: 'systemRole',
 	components: { AddRole, EditRole },

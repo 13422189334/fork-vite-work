@@ -147,10 +147,10 @@
 
 <script lang="ts">
 import { reactive, toRefs, onMounted } from 'vue';
-import { useStore } from '/@/store/index';
-import { i18n } from '/@/i18n/index';
-import IconSelector from '/@/components/iconSelector/index.vue';
-// import { setBackEndControlRefreshRoutes } from "/@/router/backEnd";
+import { useStore } from '@/store/index';
+import { i18n } from '@/i18n/index';
+import IconSelector from '@/components/iconSelector/index.vue';
+// import { setBackEndControlRefreshRoutes } from "@/router/backEnd";
 export default {
 	name: 'systemAddMenu',
 	components: { IconSelector },

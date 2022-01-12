@@ -31,8 +31,8 @@
 <script lang="ts">
 import { toRefs, reactive, computed, defineComponent, getCurrentInstance, onMounted, nextTick, onBeforeMount } from 'vue';
 import { useRoute, onBeforeRouteUpdate } from 'vue-router';
-import { useStore } from '/@/store/index';
-import SubItem from '/@/layout/navMenu/subItem.vue';
+import { useStore } from '@/store/index';
+import SubItem from '@/layout/navMenu/subItem.vue';
 export default defineComponent({
 	name: 'navMenuHorizontal',
 	components: { SubItem },

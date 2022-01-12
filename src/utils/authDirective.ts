@@ -1,6 +1,6 @@
 import type { App } from 'vue';
-import { store } from '/@/store/index.ts';
-import { judementSameArr } from '/@/utils/arrayOperation';
+import { store } from '@/store/index.ts';
+import { judementSameArr } from '@/utils/arrayOperation';
 
 /**
  * 用户权限指令

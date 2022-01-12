@@ -24,9 +24,9 @@
 
 <script lang="ts">
 import { toRefs, reactive, computed, onMounted } from 'vue';
-import { useStore } from '/@/store/index';
-import { resetRoute, setAddRoute, setFilterMenuAndCacheTagsViewRoutes } from '/@/router/index';
-import { Session } from '/@/utils/storage';
+import { useStore } from '@/store/index';
+import { resetRoute, setAddRoute, setFilterMenuAndCacheTagsViewRoutes } from '@/router/index';
+import { Session } from '@/utils/storage';
 export default {
 	name: 'limitsFrontEndPage',
 	setup() {

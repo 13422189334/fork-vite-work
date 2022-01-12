@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted, nextTick, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { useStore } from '/@/store/index';
+import { useStore } from '@/store/index';
 export default defineComponent({
 	name: 'layoutIfameView',
 	setup() {

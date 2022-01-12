@@ -99,8 +99,8 @@
 import { toRefs, reactive, onMounted, nextTick, computed, getCurrentInstance, watch, onActivated } from 'vue';
 import * as echarts from 'echarts';
 import { CountUp } from 'countup.js';
-import { formatAxis } from '/@/utils/formatTime';
-import { useStore } from '/@/store/index';
+import { formatAxis } from '@/utils/formatTime';
+import { useStore } from '@/store/index';
 import { topCardItemList, environmentList, activitiesList } from './mock';
 export default {
 	name: 'home',

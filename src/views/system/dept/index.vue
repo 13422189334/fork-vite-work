@@ -54,8 +54,8 @@
 <script lang="ts">
 import { ref, toRefs, reactive, onMounted } from 'vue';
 import { ElMessageBox, ElMessage } from 'element-plus';
-import AddDept from '/@/views/system/dept/component/addDept.vue';
-import EditDept from '/@/views/system/dept/component/editDept.vue';
+import AddDept from '@/views/system/dept/component/addDept.vue';
+import EditDept from '@/views/system/dept/component/editDept.vue';
 export default {
 	name: 'systemDept',
 	components: { AddDept, EditDept },

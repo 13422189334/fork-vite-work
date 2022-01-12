@@ -6,8 +6,8 @@
 
 <script lang="ts">
 import { computed } from 'vue';
-import { useStore } from '/@/store/index';
-import NavBarsIndex from '/@/layout/navBars/index.vue';
+import { useStore } from '@/store/index';
+import NavBarsIndex from '@/layout/navBars/index.vue';
 export default {
 	name: 'layoutHeader',
 	components: { NavBarsIndex },

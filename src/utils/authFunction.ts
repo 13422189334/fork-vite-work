@@ -1,5 +1,5 @@
-import { store } from '/@/store/index.ts';
-import { judementSameArr } from '/@/utils/arrayOperation';
+import { store } from '@/store/index.ts';
+import { judementSameArr } from '@/utils/arrayOperation';
 
 /**
  * 单个权限验证

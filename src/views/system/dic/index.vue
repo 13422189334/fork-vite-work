@@ -57,8 +57,8 @@
 <script lang="ts">
 import { toRefs, reactive, onMounted, ref } from 'vue';
 import { ElMessageBox, ElMessage } from 'element-plus';
-import AddDic from '/@/views/system/dic/component/addDic.vue';
-import EditDic from '/@/views/system/dic/component/editDic.vue';
+import AddDic from '@/views/system/dic/component/addDic.vue';
+import EditDic from '@/views/system/dic/component/editDic.vue';
 export default {
 	name: 'systemDic',
 	components: { AddDic, EditDic },

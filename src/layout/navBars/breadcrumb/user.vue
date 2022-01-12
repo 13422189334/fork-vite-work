@@ -82,12 +82,12 @@ import { useRouter } from 'vue-router';
 import { ElMessageBox, ElMessage } from 'element-plus';
 import screenfull from 'screenfull';
 import { useI18n } from 'vue-i18n';
-import { resetRoute } from '/@/router/index';
-import { useStore } from '/@/store/index';
-import other from '/@/utils/other';
-import { Session, Local } from '/@/utils/storage';
-import UserNews from '/@/layout/navBars/breadcrumb/userNews.vue';
-import Search from '/@/layout/navBars/breadcrumb/search.vue';
+import { resetRoute } from '@/router/index';
+import { useStore } from '@/store/index';
+import other from '@/utils/other';
+import { Session, Local } from '@/utils/storage';
+import UserNews from '@/layout/navBars/breadcrumb/userNews.vue';
+import Search from '@/layout/navBars/breadcrumb/search.vue';
 export default {
 	name: 'layoutBreadcrumbUser',
 	components: { UserNews, Search },

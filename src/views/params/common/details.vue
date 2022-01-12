@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent, toRefs, reactive, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { useStore } from '/@/store/index';
+import { useStore } from '@/store/index';
 export default defineComponent({
 	name: 'paramsCommonDetails',
 	setup() {

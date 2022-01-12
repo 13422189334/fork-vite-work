@@ -9,7 +9,7 @@
 <script lang="ts">
 import { toRefs, reactive, computed, onMounted, getCurrentInstance } from 'vue';
 import * as echarts from 'echarts';
-import { useStore } from '/@/store/index';
+import { useStore } from '@/store/index';
 import { echartsTreeList } from './mock';
 export default {
 	name: 'funEchartsTree',

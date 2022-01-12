@@ -32,10 +32,10 @@
 
 <script lang="ts">
 import { toRefs, reactive, computed } from 'vue';
-import Account from '/@/views/login/component/account.vue';
-import Mobile from '/@/views/login/component/mobile.vue';
-import Scan from '/@/views/login/component/scan.vue';
-import { useStore } from '/@/store/index';
+import Account from '@/views/login/component/account.vue';
+import Mobile from '@/views/login/component/mobile.vue';
+import Scan from '@/views/login/component/scan.vue';
+import { useStore } from '@/store/index';
 export default {
 	name: 'loginIndex',
 	components: { Account, Mobile, Scan },

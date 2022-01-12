@@ -10,13 +10,13 @@
 <script lang="ts">
 import { computed, ref, getCurrentInstance, onBeforeMount, onMounted, onUnmounted, nextTick, defineComponent, watch, reactive, toRefs } from 'vue';
 import { useRoute } from 'vue-router';
-import { useStore } from '/@/store/index';
-import other from '/@/utils/other';
-import { Local, Session } from '/@/utils/storage';
-import setIntroduction from '/@/utils/setIconfont';
-import LockScreen from '/@/layout/lockScreen/index.vue';
-import Setings from '/@/layout/navBars/breadcrumb/setings.vue';
-import CloseFull from '/@/layout/navBars/breadcrumb/closeFull.vue';
+import { useStore } from '@/store/index';
+import other from '@/utils/other';
+import { Local, Session } from '@/utils/storage';
+import setIntroduction from '@/utils/setIconfont';
+import LockScreen from '@/layout/lockScreen/index.vue';
+import Setings from '@/layout/navBars/breadcrumb/setings.vue';
+import CloseFull from '@/layout/navBars/breadcrumb/closeFull.vue';
 export default defineComponent({
 	name: 'app',
 	components: { LockScreen, Setings, CloseFull },

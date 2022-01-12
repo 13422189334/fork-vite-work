@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { computed } from 'vue';
-import { useStore } from '/@/store/index';
+import { useStore } from '@/store/index';
 export default {
 	name: 'auth',
 	props: {

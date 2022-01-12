@@ -1,7 +1,7 @@
 import { Module } from 'vuex';
 // 此处加上 `.ts` 后缀报错，具体原因不详
-import { TagsViewRoutesState, RootStateTypes } from '/@/store/interface/index';
-import { Session } from '/@/utils/storage';
+import { TagsViewRoutesState, RootStateTypes } from '@/store/interface/index';
+import { Session } from '@/utils/storage';
 
 const tagsViewRoutesModule: Module<TagsViewRoutesState, RootStateTypes> = {
 	namespaced: true,

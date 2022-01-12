@@ -11,9 +11,9 @@
 
 <script lang="ts">
 import { toRefs, reactive, computed, watch, getCurrentInstance, onBeforeMount } from 'vue';
-import { useStore } from '/@/store/index';
-import Logo from '/@/layout/logo/index.vue';
-import Vertical from '/@/layout/navMenu/vertical.vue';
+import { useStore } from '@/store/index';
+import Logo from '@/layout/logo/index.vue';
+import Vertical from '@/layout/navMenu/vertical.vue';
 export default {
 	name: 'layoutAside',
 	components: { Logo, Vertical },
