@@ -18,7 +18,7 @@
 			</div>
 			<el-table :data="tableData.data" style="width: 100%">
 				<el-table-column type="index" label="序号" width="50" />
-				<el-table-column prop="userName" label="账户名称" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="username" label="账户名称" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="userNickname" label="用户昵称" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="roleSign" label="关联角色" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="department" label="部门" show-overflow-tooltip></el-table-column>
@@ -34,8 +34,8 @@
 				<el-table-column prop="createTime" label="创建时间" show-overflow-tooltip></el-table-column>
 				<el-table-column label="操作" width="100">
 					<template #default="scope">
-						<el-button :disabled="scope.row.userName === 'admin'" size="mini" type="text" @click="onOpenEditUser(scope.row)">修改</el-button>
-						<el-button :disabled="scope.row.userName === 'admin'" size="mini" type="text" @click="onRowDel(scope.row)">删除</el-button>
+						<el-button :disabled="scope.row.username === 'admin'" size="mini" type="text" @click="onOpenEditUser(scope.row)">修改</el-button>
+						<el-button :disabled="scope.row.username === 'admin'" size="mini" type="text" @click="onRowDel(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -85,7 +85,7 @@ export default {
 			const data: Array<object> = [];
 			for (let i = 0; i < 2; i++) {
 				data.push({
-					userName: i === 0 ? 'admin' : 'test',
+					username: i === 0 ? 'admin' : 'test',
 					userNickname: i === 0 ? '我是管理员' : '我是普通用户',
 					roleSign: i === 0 ? 'admin' : 'common',
 					department: i === 0 ? ['vueNextAdmin', 'IT外包服务'] : ['vueNextAdmin', '资本控股'],
@@ -112,7 +112,7 @@ export default {
 		};
 		// 删除用户
 		const onRowDel = (row: Object) => {
-			ElMessageBox.confirm(`此操作将永久删除账户名称：“${row.userName}”，是否继续?`, '提示', {
+			ElMessageBox.confirm(`此操作将永久删除账户名称：“${row.username}”，是否继续?`, '提示', {
 				confirmButtonText: '确认',
 				cancelButtonText: '取消',
 				type: 'warning',

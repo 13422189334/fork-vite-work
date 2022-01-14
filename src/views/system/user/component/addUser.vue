@@ -5,7 +5,7 @@
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
 						<el-form-item label="账户名称">
-							<el-input v-model="ruleForm.userName" placeholder="请输入账户名称" clearable></el-input>
+							<el-input v-model="ruleForm.username" placeholder="请输入账户名称" clearable></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
@@ -96,7 +96,7 @@ export default {
 		const state = reactive({
 			isShowDialog: false,
 			ruleForm: {
-				userName: '', // 账户名称
+				username: '', // 账户名称
 				userNickname: '', // 用户昵称
 				roleSign: '', // 关联角色
 				department: [], // 部门

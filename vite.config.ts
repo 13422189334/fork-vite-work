@@ -34,7 +34,7 @@ const viteConfig: UserConfig = {
 				rewrite: (path) => path.replace(/^\/gitee/, ''),
 			},
 			'/cstmr-manager': {
-				target: 'https://development.mhealth100.com/cstmr-manager',
+				target: 'https://cstmr.mhealth100.com/cstmr-manager',
 				ws: true,
 				changeOrigin: true,
 				rewrite: (path) => path.replace(/^\/cstmr-manager/, ''),

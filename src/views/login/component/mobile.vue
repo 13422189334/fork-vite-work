@@ -1,7 +1,7 @@
 <template>
 	<el-form class="login-content-form">
 		<el-form-item class="login-animation-one">
-			<el-input type="text" :placeholder="$t('message.mobile.placeholder1')" v-model="ruleForm.userName" clearable autocomplete="off">
+			<el-input type="text" :placeholder="$t('message.mobile.placeholder1')" v-model="ruleForm.username" clearable autocomplete="off">
 				<template #prefix>
 					<i class="iconfont icon-dianhua el-input__icon"></i>
 				</template>
@@ -40,7 +40,7 @@ export default defineComponent({
 	setup() {
 		const state = reactive({
 			ruleForm: {
-				userName: '',
+				username: '',
 				code: '',
 			},
 		});

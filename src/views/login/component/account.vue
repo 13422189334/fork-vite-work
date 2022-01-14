@@ -1,7 +1,7 @@
 <template>
 	<el-form class="login-content-form">
 		<el-form-item class="login-animation-one">
-			<el-input type="text" :placeholder="$t('message.account.accountPlaceholder1')" v-model="ruleForm.userName" clearable autocomplete="off">
+			<el-input type="text" :placeholder="$t('message.account.accountPlaceholder1')" v-model="ruleForm.username" clearable autocomplete="off">
 				<template #prefix>
 					<el-icon class="el-input__icon"><elementUser /></el-icon>
 				</template>
@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-	import { toRefs, reactive, defineComponent, computed, getCurrentInstance, onMounted } from 'vue';
+import { toRefs, reactive, defineComponent, computed, getCurrentInstance, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import { useI18n } from 'vue-i18n';
@@ -74,6 +74,9 @@ import { useStore } from '@/store/index';
 import { Session } from '@/utils/storage';
 import { formatAxis } from '@/utils/formatTime';
 import { adminRoles, adminAuthBtnList, adminPhoto, testRoles, testAuthBtnList, testPhoto } from '../mock/role'
+import { LoginParams, signIn } from '@/api/login';
+
+
 export default defineComponent({
 	name: 'loginAccount',
 	setup() {
@@ -85,7 +88,7 @@ export default defineComponent({
 		const state = reactive({
 			isShowPassword: false,
 			ruleForm: {
-				userName: '',
+				username: '',
 				password: '',
 				code: '',
 			},
@@ -109,43 +112,42 @@ export default defineComponent({
 		});
 		// 登录
 		const onSignIn = async () => {
-			// 模拟数据
 			state.loading.signIn = true;
-			let defaultRoles: Array<string> = [];
-			let defaultAuthBtnList: Array<string> = [];
-			let defaultPhoto: string = '';
 			// 不同用户模拟不同的用户权限
-			if (state.ruleForm.userName === 'admin') {
-				defaultRoles = adminRoles;
-				defaultAuthBtnList = adminAuthBtnList;
-				defaultPhoto = adminPhoto;
-			} else {
-				defaultRoles = testRoles;
-				defaultAuthBtnList = testAuthBtnList;
-				defaultPhoto = testPhoto;
-			}
+			let isAdmin: boolean = state.ruleForm.username === 'admin'
+			let defaultRoles: Array<string> = isAdmin ? adminRoles : testRoles;
+			let defaultAuthBtnList: Array<string> = isAdmin ? adminAuthBtnList : testAuthBtnList;
+			let defaultPhoto: string = isAdmin ? adminPhoto : testPhoto;
 			// 用户信息模拟数据
 			const userInfos = {
-				userName: state.ruleForm.userName,
+				username: state.ruleForm.username,
 				photo: defaultPhoto,
 				time: new Date().getTime(),
 				roles: defaultRoles,
 				authBtnList: defaultAuthBtnList,
 			};
-			// 存储 token、用户信息 到浏览器缓存
-			Session.set('token', Math.random().toString(36).substr(0));
+			// 存储 用户信息、token 到浏览器缓存
 			Session.set('userInfo', userInfos);
-			// 1、请注意执行顺序(存储用户信息到vuex)
-			store.dispatch('userInfos/setUserInfos', userInfos);
-			if (!store.state.themeConfig.themeConfig.isRequestRoutes) {
-				// 前端控制路由，2、请注意执行顺序
-				await initFrontEndControlRoutes();
-				signInSuccess();
-			} else {
-				// 模拟后端控制路由，添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
-				await initBackEndControlRoutes();
-				signInSuccess();
-			}
+			const { username, password, code: captcha } = state.ruleForm
+			signIn({ username, password, captcha }).then(async (res) => {
+				Session.set('token', JSON.stringify(res));
+				// Session.set('token', Math.random().toString(36).substr(0));
+				// 1、请注意执行顺序(存储用户信息到vuex)
+				store.dispatch('userInfos/setUserInfos', userInfos);
+				if (!store.state.themeConfig.themeConfig.isRequestRoutes) {
+					// 前端控制路由，2、请注意执行顺序
+					await initFrontEndControlRoutes();
+					signInSuccess();
+				} else {
+					// 模拟后端控制路由，添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
+					await initBackEndControlRoutes();
+					signInSuccess();
+				}
+			}).catch(err => {
+				changeCaptcha();  return false;
+			}).finally(() => {
+				state.loading.signIn = false;
+			})
 		};
 		// 登录成功后的跳转
 		const signInSuccess = () => {
