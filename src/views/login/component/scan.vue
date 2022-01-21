@@ -1,6 +1,6 @@
 <template>
 	<div class="login-scan-container">
-		<div ref="qrcodeRef"></div>
+		<div ref="qrCodeRef"></div>
 	</div>
 </template>
 
@@ -13,10 +13,11 @@ export default defineComponent({
 		const { proxy } = getCurrentInstance() as any;
 		const state = reactive({});
 		// 初始化生成二维码
-		const initQrcode = () => {
-			proxy.$refs.qrcodeRef.innerHTML = '';
-			new QRCode(proxy.$refs.qrcodeRef, {
-				text: `https://qm.qq.com/cgi-bin/qm/qr?k=RdUY97Vx0T0vZ_1OOu-X1yFNkWgDwbjC&jump_from=webapi`,
+		const initQrCode = () => {
+			proxy.$refs.qrCodeRef.innerHTML = '';
+			new QRCode(proxy.$refs.qrCodeRef, {
+				// text: `https://qm.qq.com/cgi-bin/qm/qr?k=RdUY97Vx0T0vZ_1OOu-X1yFNkWgDwbjC&jump_from=webapi`,
+				text: `叼毛你好`,
 				width: 260,
 				height: 260,
 				colorDark: '#000000',
@@ -25,7 +26,7 @@ export default defineComponent({
 		};
 		// 页面加载时
 		onMounted(() => {
-			initQrcode();
+			initQrCode();
 		});
 		return {
 			...toRefs(state),

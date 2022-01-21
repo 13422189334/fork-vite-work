@@ -88,6 +88,7 @@ import other from '@/utils/other';
 import { Session, Local } from '@/utils/storage';
 import UserNews from '@/layout/navBars/breadcrumb/userNews.vue';
 import Search from '@/layout/navBars/breadcrumb/search.vue';
+import { signOut } from '@/api/login';
 export default {
 	name: 'layoutBreadcrumbUser',
 	components: { UserNews, Search },
@@ -165,12 +166,12 @@ export default {
 					},
 				})
 					.then(() => {
-						Session.clear(); // 清除缓存/token等
-						resetRoute(); // 删除/重置路由
-						router.push('/login');
-						setTimeout(() => {
-							ElMessage.success(t('message.user.logOutSuccess'));
-						}, 300);
+						signOut().then(() => {
+							router.push('/login');
+							setTimeout(() => {
+								ElMessage.success(t('message.user.logOutSuccess'));
+							}, 300);
+						})
 					})
 					.catch(() => {});
 			} else {

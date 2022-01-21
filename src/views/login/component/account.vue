@@ -34,7 +34,7 @@
 						type="text"
 						maxlength="4"
 						:placeholder="$t('message.account.accountPlaceholder3')"
-						v-model="ruleForm.code"
+						v-model="ruleForm.captcha"
 						clearable
 						autocomplete="off"
 					>
@@ -45,8 +45,7 @@
 				</el-col>
 				<el-col :span="8">
 					<div class="login-content-code">
-						<!--						<span class="login-content-code-img">1234</span>-->
-						<el-image class="login-content-code-img" :src="captcha" @click="() => changeCaptcha()"></el-image>
+						<span class="login-content-code-img">1234</span>
 					</div>
 				</el-col>
 			</el-row>
@@ -73,8 +72,8 @@ import { initBackEndControlRoutes } from '@/router/backEnd';
 import { useStore } from '@/store/index';
 import { Session } from '@/utils/storage';
 import { formatAxis } from '@/utils/formatTime';
-import { adminRoles, adminAuthBtnList, adminPhoto, testRoles, testAuthBtnList, testPhoto } from '../mock/role'
-import { LoginParams, signIn } from '@/api/login';
+
+import { signIn } from '@/api/login';
 
 
 export default defineComponent({
@@ -90,22 +89,13 @@ export default defineComponent({
 			ruleForm: {
 				username: '',
 				password: '',
-				code: '',
+				captcha: ''
 			},
 			loading: {
 				signIn: false,
 			},
-			captcha: ''
 		});
 
-		onMounted(() => {
-			changeCaptcha()
-		});
-
-		// 验证码获取
-		const changeCaptcha = () => {
-			state.captcha = `/cstmr-manager/captcha/kaptcha.jpg?${Date.now()}`
-		};
 		// 时间获取
 		const currentTime = computed(() => {
 			return formatAxis(new Date());
@@ -113,27 +103,11 @@ export default defineComponent({
 		// 登录
 		const onSignIn = async () => {
 			state.loading.signIn = true;
-			// 不同用户模拟不同的用户权限
-			let isAdmin: boolean = state.ruleForm.username === 'admin'
-			let defaultRoles: Array<string> = isAdmin ? adminRoles : testRoles;
-			let defaultAuthBtnList: Array<string> = isAdmin ? adminAuthBtnList : testAuthBtnList;
-			let defaultPhoto: string = isAdmin ? adminPhoto : testPhoto;
-			// 用户信息模拟数据
-			const userInfos = {
-				username: state.ruleForm.username,
-				photo: defaultPhoto,
-				time: new Date().getTime(),
-				roles: defaultRoles,
-				authBtnList: defaultAuthBtnList,
-			};
-			// 存储 用户信息、token 到浏览器缓存
-			Session.set('userInfo', userInfos);
-			const { username, password, code: captcha } = state.ruleForm
-			signIn({ username, password, captcha }).then(async (res) => {
+
+			signIn(state.ruleForm).then(async (res) => {
 				Session.set('token', JSON.stringify(res));
-				// Session.set('token', Math.random().toString(36).substr(0));
 				// 1、请注意执行顺序(存储用户信息到vuex)
-				store.dispatch('userInfos/setUserInfos', userInfos);
+				await store.dispatch('userInfos/setUserInfos', res);
 				if (!store.state.themeConfig.themeConfig.isRequestRoutes) {
 					// 前端控制路由，2、请注意执行顺序
 					await initFrontEndControlRoutes();
@@ -144,7 +118,7 @@ export default defineComponent({
 					signInSuccess();
 				}
 			}).catch(err => {
-				changeCaptcha();  return false;
+				return false;
 			}).finally(() => {
 				state.loading.signIn = false;
 			})
@@ -176,7 +150,6 @@ export default defineComponent({
 		};
 		return {
 			currentTime,
-			changeCaptcha,
 			onSignIn,
 			...toRefs(state),
 		};
